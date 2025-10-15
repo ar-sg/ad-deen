@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pengumpulan Tugas - MTs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">T<span class="small">GS</span></div>
+      <div>
+        <h1>Web Pengumpulan Tugas</h1>
+        <p class="lead">Halaman sederhana untuk mengarahkan siswa ke formulir pengumpulan tugas (Google Forms).</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="actions">
+        <a class="btn" id="open-form" target="_blank" href="https://forms.gle/JVEFHku7vSazSBiGA">Buka Formulir</a>
+        <button class="btn ghost" id="copy-link">Salin Link</button>
+        <button class="btn ghost" id="toggle-embed">Tampilkan/Sembunyikan Form</button>
+      </div>
+
+      <p class="note">Jika embed tidak tampil, klik tombol "Buka Formulir" untuk membuka di tab baru.</p>
+
+      <div id="embedWrapper" class="embed-wrapper">
+        <iframe class="form-embed" id="formFrame" src="https://forms.gle/JVEFHku7vSazSBiGA" title="Form Pengumpulan Tugas" loading="lazy"></iframe>
+      </div>
+
+      <div class="instructions">
+        <h3>Petunjuk untuk Guru</h3>
+        <ol>
+          <li>Pastikan <strong>Google Form</strong> sudah mengizinkan pengumpulan respons.</li>
+          <li>Hubungkan hasil ke Google Sheets melalui tab <em>Responses</em>.</li>
+          <li>Untuk tampilan embed yang lebih baik, gunakan link embed penuh dari Google Form.</li>
+        </ol>
+      </div>
+
+      <footer>
+        Dibuat otomatis — bisa disesuaikan teks, warna, atau instruksi bila perlu.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById('copy-link');
+    const toggleBtn = document.getElementById('toggle-embed');
+    const embed = document.getElementById('embedWrapper');
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('https://forms.gle/JVEFHku7vSazSBiGA');
+        copyBtn.textContent = 'Tersalin!';
+        setTimeout(() => copyBtn.textContent = 'Salin Link', 1200);
+      } catch (e) {
+        alert('Gagal menyalin link. Salin manual: https://forms.gle/JVEFHku7vSazSBiGA');
+      }
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      embed.style.display = (embed.style.display === 'none') ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
